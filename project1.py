@@ -1,5 +1,6 @@
-
+# Python SAT Vocabulary Game
 import random
+
 
 def welcome():
     print("=" * 40)
@@ -26,11 +27,13 @@ def welcome():
     Good luck! 🚀
     """)
 
+
 def vocabulary_section():
     print("\n" + "=" * 40)
     print("          📖 VOCABULARY")
     print("=" * 40)
 
+    # Store each vocabulary word together with its meaning and example sentence.
     vocabulary = {
         "Erratic": {
             "meaning": "unpredictable, inconsistent, or irregular",
@@ -158,33 +161,43 @@ def vocabulary_section():
         }
     }
 
+    # Display all words with their definitions and example sentences.
     for word, information in vocabulary.items():
         print(f"\n📚 {word}")
         print(f"Meaning: {information['meaning']}")
         print(f"Example: {information['example']}")
+
     return vocabulary
+
+
 def ready():
     print("\n" + "=" * 40)
     print("              🤓 READY?")
     print("""You've learned all 25 words.
 Now it's time to put them to the test! 🧠
 
-You will get 25 sentences with missing words.
-Use the vocabulary from Set 1 to complete them.
+    You will get 25 sentences with missing words.
+    Use the vocabulary from Set 1 to complete them.
 
-No options.
-No hints.
-Just you and your vocabulary. 😈""")
+    No options.
+    No hints.
+    Just you and your vocabulary. 😈""")
+
+    # Keep asking until the user gives a valid yes/no response.
     while True:
         answer = input("Are you ready to take this test? (yes/no): ").lower()
+
         if answer == "yes":
             print("\nLet's start the test! 📓")
             return True
+
         elif answer == "no":
             print("\nNo problem! Let's review the vocab again! 📖")
             return False
-        else: 
+
+        else:
             print("\nI didn't understand you! Please type again! (yes/no)")
+
 
 questions = [
     {
@@ -312,6 +325,8 @@ questions = [
         "answer": "adept"
     }
 ]
+
+
 def fighting_time(questions):
     print("\n" + "=" * 40)
     print("             🧠 QUIZ")
@@ -319,15 +334,21 @@ def fighting_time(questions):
 
     print("Use the words below to complete the sentences!\n")
     print("You can use each word only once!\n")
+
+    # Extract the correct answers to create the word bank shown before the quiz.
     words = [question["answer"] for question in questions]
+
     for word in words:
         print(f"∙ {word}")
+
     print("\nGood luck! 🍀 You can handle this! ✌🏻")
 
+    # Randomize the question order so each quiz attempt is different.
     random.shuffle(questions)
 
     score = 0
 
+    # Track the question number while processing every question in the shuffled list.
     for number, question in enumerate(questions, start=1):
         print("\n" + "=" * 40)
         print(f"             🥊 BATTLE {number} / 25")
@@ -340,11 +361,14 @@ def fighting_time(questions):
         if answer == question["answer"].lower():
             print("✅ Correct! You've nailed it! 💗")
             score += 1
-        else: 
+
+        else:
             print("Ohh😞... ❌ Incorrect! But, you can do it! Hard work pay off! 🎀")
             print(f"Correct answer: {question['answer']}")
 
     return score
+
+
 def battle_results(score):
     print("\n" + "=" * 40)
     print("             🏆 BATTLE RESULTS")
@@ -353,24 +377,34 @@ def battle_results(score):
     print("Of course, it is so exciting 😭")
     print(f"\nYour score: {score}/25")
 
+    # Use score ranges to provide different feedback based on the user's performance.
     if score == 25:
         print("🔥 PERFECT! You mastered all 25 words! 🧠 You are the best! 🌹")
+
     elif score >= 20:
         print("EXCELLENT JOB! 👏🏻 Your vocabulary skills are strong! 📓")
+
     elif score >= 15:
         print("Good job! 👍")
-    else: 
-        print("📚 Keep practicing...! You still have to review the vocab! ")
+
+    else:
+        print("📚 Keep practicing...! You still have to review the vocab!")
+
+
 def play_again():
+    # Keep the game running until the user chooses a valid option.
     while True:
         answer = input("Do you want to play again? (yes/no): ").strip().lower()
 
         if answer == "yes":
             return True
+
         elif answer == "no":
             return False
+
         else:
-            print("\nI can't understand you! Please type again! (yes/no)!") 
+            print("\nI can't understand you! Please type again! (yes/no)!")
+
 
 welcome()
 vocabulary = vocabulary_section()
@@ -382,6 +416,7 @@ if ready():
 
         if play_again():
             print("\n😼 Let's fight again!")
+
         else:
             print("\n👋 Thanks for playing!")
             print("Keep learning and keep fighting! 📚🥊")
